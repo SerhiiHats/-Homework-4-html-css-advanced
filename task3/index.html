@@ -6,9 +6,57 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>task3</title>
+   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+
+   <div class="container">
+      <header>
+         <p>Завдання 3</p>
+         <p>Використовуючи елемент SVG, напишіть модуль, за допомогою якого на сторінці відображатиметься діаграма
+            відповідно до даних переданих масивом модуль.</p>
+      </header>
+
+      <main>
+         <div class="diagram">
+
+         </div>
+         <h1 class="reinbow">Reinbow</h1>
+         <div class="graf">
+
+         </div>
+      </main>
+      <aside>
+
+      </aside>
+
+   </div>
+
+   <script src="js/diagram.js"></script>
+   <script src="js/rainbow.js"></script>
+   <script src="js/paintText.js"></script>
+   <script>
+
+      let elemForViewDiagram = document.querySelector(".diagram");
+      const valuesForDiagram = [10, 152, 129, 251, 95, 190, 239, 218, 45, 71];
+
+      let elemRainbow = document.querySelector(".graf");
+      const COUNT = 17;
+      const HI = 500;
+
+      //colors:// brown  coral aqua darkcyan darkolivegreen royalblue goldenrod
+      let elemDiagram = createDiagram(valuesForDiagram, 80, 60, "royalblue");
+      elemForViewDiagram.append(elemDiagram);
+
+      document.querySelector(".reinbow").innerHTML = createColorText(".reinbow");
+
+      let timeId = setInterval(() => {
+         raindbow = paintReinbow(COUNT, HI);
+         elemRainbow.innerHTML = "";
+         elemRainbow.append(raindbow)
+      }, 700); 
+   </script>
 
 </body>
 
