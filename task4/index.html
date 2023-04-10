@@ -6,10 +6,138 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>task4</title>
+   <style>
+      .container {
+         display: grid;
+         grid-template-columns: 1fr 1280px 1fr;
+      }
+
+      p {
+         font-size: 20px;
+         font-weight: bold;
+      }
+
+      header p:first-child {
+         color: green;
+         font-size: 24px;
+      }
+
+      main {
+         height: 900px;
+         grid-column: 2;
+         border: 1px solid tomato;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         align-items: center;
+         align-content: flex-start;
+      }
+
+      img {
+         margin: 10px;
+         transition: 0.4s;
+      }
+
+      #address>p:first-child {
+         font-size: 20px;
+         color: green;
+         font-weight: bold;
+      }
+
+      #address>p {
+         font-size: 14px;
+         color: black;
+         font-weight: 500;
+         margin: 10px;
+      }
+   </style>
+
 </head>
 
 <body>
+   <div class="container">
+      <header>
+         <p>Завдання 4</p>
+         <p>Створіть сторінку із довільною кількістю зображень. Створіть сценарій, який виведе адреси всіх зображень,
+            завантажених на сторінку, після чого з інтервалом в одну секунду по черзі кожному зображенню додасть червону
+            рамку.</p>
+      </header>
 
+      <main>
+
+      </main>
+      <aside>
+
+         <div id="address">
+            <p> Aдреси всіх зображень:</p>
+         </div>
+      </aside>
+
+   </div>
+
+
+   <script>
+      const images = [
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg",
+         "https://storage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg"
+      ]
+
+      const main = document.querySelector("main");
+      const address = document.querySelector("#address");
+      let img = document.querySelectorAll("img");
+      let i = 1;
+      let j = 0;
+      let flag = false;
+
+      images.forEach(srsImg => {
+         main.innerHTML += `<img src=${srsImg} alt="test" width="200px">`;
+      });
+
+      main.querySelectorAll("img").forEach(img => {
+         img.style.opacity = 0.5;
+      });
+
+      document.querySelectorAll("img").forEach(img => {
+         address.innerHTML += `<p> ${i++}: src=${img.src}`;
+      });
+
+      let timeId = setInterval(() => {
+         document.querySelector(`[src="${images[j]}"]`).style.border = "4px solid red";
+         document.querySelector(`[src="${images[j]}"]`).width += 30;
+         document.querySelector(`[src="${images[j]}"]`).style.opacity = 1;
+
+         if (flag) {
+            if (j === 0) {
+               document.querySelector(`[src="${images[images.length - 1]}"]`).style.border = "none";
+               document.querySelector(`[src="${images[images.length - 1]}"]`).width -= 30;
+               document.querySelector(`[src="${images[images.length - 1]}"]`).style.opacity = 0.5;
+            } else {
+               document.querySelector(`[src="${images[j - 1]}"]`).style.border = "none";
+               document.querySelector(`[src="${images[j - 1]}"]`).width -= 30;
+               document.querySelector(`[src="${images[j - 1]}"]`).style.opacity = 0.5;
+            }
+         }
+
+         j++;
+         if (j === images.length) {
+            j = 0;
+         }
+         flag = true;
+
+      }, 1000);
+
+
+
+
+   </script>
 </body>
 
 </html>
